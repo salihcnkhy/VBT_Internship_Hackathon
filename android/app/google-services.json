@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "773655359817",
+    "firebase_url": "https://vbt-hackatlon.firebaseio.com",
+    "project_id": "vbt-hackatlon",
+    "storage_bucket": "vbt-hackatlon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773655359817:android:15b23ab8d79b43db806a98",
+        "android_client_info": {
+          "package_name": "com.example.vbt_hackathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773655359817-a03fhcc2jvn9vmcjkc3ctfb0a4uigjlc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5T99mRPZKYkSLnXfF2hxLYIFIXU2l97Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773655359817-a03fhcc2jvn9vmcjkc3ctfb0a4uigjlc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
