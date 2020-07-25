@@ -4,7 +4,8 @@ import 'package:vbt_hackathon/Core/Firebase/Firebase.dart';
 import 'package:vbt_hackathon/Views/register_page/register_page.dart';
 import './login_page.dart';
 
-abstract class LoginPageViewModel extends State<LoginPage> with Firebase {
+abstract class LoginPageViewModel extends State<LoginPage>
+    with FirebaseAuthProcess {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   Future<FirebaseUser> myFuture;
