@@ -1,8 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:vbt_socket_client_demo/SocketIO.dart';
 import 'dart:convert';
+
+import 'SocketIO.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,20 +37,15 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
-                  onPressed: () => socketIO.connect(urls[0]),
-                  child: Text("Connect Default")),
-              FlatButton(
-                  onPressed: () => socketIO.connect(urls[1]),
-                  child: Text("Connect A1")),
+                  onPressed: () => socketIO.connect(urls[0]), child: Text("Connect Default")),
+              FlatButton(onPressed: () => socketIO.connect(urls[1]), child: Text("Connect A1")),
               FlatButton(
                   onPressed: () => socketIO.addListener(
-                      "setRoomInfo",
-                      (data) =>
-                          {roomID = json.decode(data)["roomID"].toString()}),
+                      "setRoomInfo", (data) => {roomID = json.decode(data)["roomID"].toString()}),
                   child: Text("AddListener For room info")),
               FlatButton(
-                  onPressed: () => socketIO.addListener("getWords",
-                      (data) => {print(json.decode(data)["words"].toString())}),
+                  onPressed: () => socketIO.addListener(
+                      "getWords", (data) => {print(json.decode(data)["words"].toString())}),
                   child: Text("AddListener For get words")),
               FlatButton(
                   onPressed: () => socketIO.sendMsg("sendWords", {
@@ -61,8 +56,7 @@ class _MyAppState extends State<MyApp> {
                       }),
                   child: Text("SendWords Room")),
               FlatButton(
-                  onPressed: () =>
-                      socketIO.sendMsg("SearchRoom", {"id": socketIO.uuid}),
+                  onPressed: () => socketIO.sendMsg("SearchRoom", {"id": socketIO.uuid}),
                   child: Text("StartSearch Room")),
             ],
           ),
