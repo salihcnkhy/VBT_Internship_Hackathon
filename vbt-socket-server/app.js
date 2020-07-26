@@ -3,10 +3,18 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
 
-let RoomUser = require("./models/waiting_room_user");
-let WaitingRoomParams = require("./helpers/helperParams").WaitingRoomParams;
+let RoomUser = require("./models/waiting_room_user").RoomUser;
+let GameRoom = require("./models/game_room").GameRoom;
 
+let WaitingRoomParams = require("./helpers/helperParams").WaitingRoomParams;
+let GameRoomParams = require("./helpers/helperParams").GameRoomParams;
+
+
+//Add RoomUser into wrp
 var wrp = new WaitingRoomParams();
+
+//add GameRoom into grp
+var grp = new GameRoomParams();
 
 var a1nps = io.of("a1");
 var a2nps = io.of("a2");
@@ -38,8 +46,7 @@ a1nps.on("connect", (socket) => {
             console.log(wrp.a1.length);
             if (wrp.a1.length % 2 == 1) {
                 console.log("room created");
-                socket.join(data.id);
-                socket.emit("setRoomInfo", data);
+
             } else {
                 var gamesockets = [wrp.a1.shift(), wrp.a1.shift()];
 
@@ -50,16 +57,40 @@ a1nps.on("connect", (socket) => {
                         roomID: gamesockets[0].id,
                         role: i == 0 ? "master" : "slave"
                     };
-                    user.socket.emit("setRoomInfo",JSON.stringify(data));
+                    user.socket.emit("setRoomInfo", JSON.stringify(data));
                 }
+                grp.a1.push(new GameRoom(gamesockets[0].id, gamesockets));
+                console.log(grp.a1[0]);
                 console.log("room joined to " + gamesockets[0].id);
             }
         }
     });
 
-    socket.on("sendWords",(data)=>{
+    socket.on("sendWords", (data) => {
         console.log(data.words);
-        socket.to(data.roomID).emit("getWords",data.words);
+
+        var gameRoom; 
+        for (let i = 0; i < grp.a1.length; i++) {
+            const room = grp.a1[i];
+            console.log(i.toString() +". Oda: "+room.id);
+            console.log(room.id + " === " + data.roomID);
+            if(room.id === data.roomID){
+                console.log("Room Found.");
+                gameRoom = room;
+                break;
+            }
+        }
+
+        gameRoom.words.push(data.words);
+
+        if (gameRoom.words.length == 2) {
+            gameRoom.user[0].socket.to(gameRoom.id).emit("setWords", gameRoom.words[1]);
+            gameRoom.user[1].socket.to(gameRoom.id).emit("setWords", gameRoom.words[0]);
+            console.log("All words sended: " + gameRoom.words);
+
+        } else {
+            console.log("One User Sended Words: " + gameRoom.words);
+        }
     });
 
 

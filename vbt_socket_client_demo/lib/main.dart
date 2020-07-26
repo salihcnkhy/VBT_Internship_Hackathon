@@ -43,14 +43,16 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () => socketIO.connect(urls[1]),
                   child: Text("Connect A1")),
               FlatButton(
-                  onPressed: () => socketIO.addListener(
-                      "setRoomInfo",
-                      (data) =>
-                          {roomID = json.decode(data)["roomID"].toString()}),
+                  onPressed: () => socketIO.addListener("setRoomInfo", (data) {
+                        roomID = json.decode(data)["roomID"].toString();
+                        print(roomID + " Oluşturuldu");
+                      }),
                   child: Text("AddListener For room info")),
               FlatButton(
-                  onPressed: () => socketIO.addListener("getWords",
-                      (data) => {print(json.decode(data)["words"].toString())}),
+                  onPressed: () => socketIO.addListener("setWords", (data) {
+                        print("set Words working");
+                        print(data as List<dynamic>);
+                      }),
                   child: Text("AddListener For get words")),
               FlatButton(
                   onPressed: () => socketIO.sendMsg("sendWords", {
