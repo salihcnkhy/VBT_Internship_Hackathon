@@ -16,6 +16,8 @@ dependencies:
 
   font_awesome_flutter: ^8.8.1
   auto_size_text: ^2.1.0
+  flutter_svg: any
+  smooth_page_indicator: ^0.2.0
 
   mobx: ^1.2.1+1
   build_runner: ^1.10.0
@@ -30,3 +32,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/svg/
+
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Bold.ttf
+        - asset: assets/fonts/Quicksand-Light.ttf
+        - asset: assets/fonts/Quicksand-Medium.ttf
+        - asset: assets/fonts/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand-SemiBold.ttf

@@ -1,9 +1,9 @@
-class OnboardModel {
+class OnboardingModel {
   final String title;
   final String subTitle;
   final String image;
 
-  OnboardModel(
+  OnboardingModel(
     this.title,
     this.subTitle,
     this.image,
