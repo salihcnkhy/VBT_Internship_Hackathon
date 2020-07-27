@@ -39,6 +39,21 @@ mixin _$OnboardingViewModel on _OnboardingViewModelBase, Store {
     });
   }
 
+  final _$isDoneAtom = Atom(name: '_OnboardingViewModelBase.isDone');
+
+  @override
+  bool get isDone {
+    _$isDoneAtom.reportRead();
+    return super.isDone;
+  }
+
+  @override
+  set isDone(bool value) {
+    _$isDoneAtom.reportWrite(value, super.isDone, () {
+      super.isDone = value;
+    });
+  }
+
   final _$_OnboardingViewModelBaseActionController =
       ActionController(name: '_OnboardingViewModelBase');
 
@@ -57,6 +72,7 @@ mixin _$OnboardingViewModel on _OnboardingViewModelBase, Store {
   String toString() {
     return '''
 currentPage: ${currentPage},
+isDone: ${isDone},
 isNotLastPage: ${isNotLastPage},
 buttonFinishValue: ${buttonFinishValue}
     ''';
