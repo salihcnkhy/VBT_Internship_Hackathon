@@ -1,5 +1,8 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:vbt_hackathon/Views/home_page/home_page.dart';
 import './login_page_view_model.dart';
 
 class LoginPageView extends LoginPageViewModel {
@@ -18,11 +21,7 @@ class LoginPageView extends LoginPageViewModel {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   print("User Data" + snapshot.data.toString());
-                  return Text("Success",
-                      style: TextStyle(
-                        fontSize: 27,
-                        fontWeight: FontWeight.bold,
-                      ));
+                  return HomePage();
                 } else if (snapshot.hasError) {
                   print("Hata Data" + snapshot.error.toString());
 
