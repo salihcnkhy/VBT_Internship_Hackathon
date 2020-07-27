@@ -2,6 +2,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:tuple/tuple.dart';
+import 'package:vbt_hackathon/Helper/Views/future_builder_helper.dart';
+import 'package:vbt_hackathon/Helper/Views/progress_bar.dart';
 import 'package:vbt_hackathon/Views/home_page/home_page.dart';
 import './login_page_view_model.dart';
 
@@ -15,42 +18,18 @@ class LoginPageView extends LoginPageViewModel {
         children: <Widget>[
           buildTextFields(),
           if (myFuture != null)
-            FutureBuilder(
-              //You can use setState There
+            FutureHelper(
               future: myFuture,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  print("User Data" + snapshot.data.toString());
-                  return HomePage();
-                } else if (snapshot.hasError) {
-                  print("Hata Data" + snapshot.error.toString());
-
-                  return Text("Error Occured => " + snapshot.error.toString(),
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                      ));
-                }
-                return buildBackdropFilter();
-              },
-            )
+              hasDataWidget: HomePage(),
+              hasErrorWidget: Text("Error"),
+              progressWidget: DefaultProgressBar(
+                blur: const Tuple2<double, double>(2, 2),
+                color: Colors.black.withOpacity(0.2),
+                scaleFactor: 0.25,
+              ),
+            ),
         ],
       )),
-    );
-  }
-
-  Widget buildBackdropFilter() {
-    return Container(
-      color: Colors.black.withOpacity(0.2),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-        child: Center(
-          child: Container(
-              width: MediaQuery.of(context).size.width * 0.3,
-              height: MediaQuery.of(context).size.width * 0.3,
-              child: CircularProgressIndicator()),
-        ),
-      ),
     );
   }
 

@@ -1,28 +1,22 @@
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:vbt_hackathon/Helper/Views/progress_bar.dart';
+import 'package:vbt_hackathon/Helper/Views/stream_builder_helper.dart';
+import 'package:vbt_hackathon/Views/category_detail_page/category_detail_page.dart';
 import './category_list_page_view_model.dart';
 import 'category_list_page.dart';
 
 class CategoryListPageView extends CategoryListPageViewModel {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return StreamHelper(
       stream: getQuerySnapshot("Category"),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          categories.clear();
-          for (var data in snapshot.data.documents) {
-            var category = Category.fromSnapshot(data);
-            categories.add(category);
-          }
-          return buildGridView(categories);
-        } else if (snapshot.hasError) {
-          Text("Error");
-        }
-        return buildBackdropFilter();
-      },
+      hasDataCallback: queryCallBack,
+      hasDataWidget: buildGridView(categories),
+      hasErrorWidget: Text("Error"),
+      progressWidget: DefaultProgressBar(),
     );
   }
 
@@ -42,6 +36,12 @@ class CategoryListPageView extends CategoryListPageViewModel {
       onTap: () {
         print(category.title);
         print(category.url);
+        pushNewScreen(context,
+            screen: CategoryDetailPage(
+              category: category,
+            ),
+            withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.slideUp);
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -57,21 +57,6 @@ class CategoryListPageView extends CategoryListPageViewModel {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildBackdropFilter() {
-    return Container(
-      color: Colors.black.withOpacity(0.2),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-        child: Center(
-          child: Container(
-              width: MediaQuery.of(context).size.width * 0.3,
-              height: MediaQuery.of(context).size.width * 0.3,
-              child: CircularProgressIndicator()),
         ),
       ),
     );

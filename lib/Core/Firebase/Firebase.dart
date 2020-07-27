@@ -25,4 +25,8 @@ class FirebaseAuthProcess {
         .user;
     return user;
   }
+
+  Future<FirebaseUser> checkUser() async {
+    return _auth.currentUser();
+  }
 }
