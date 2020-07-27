@@ -52,7 +52,7 @@ abstract class _OnboardingViewModelBase with Store, BaseViewModel {
   void onPageButtonPressed() {
     if (isNotLastPage)
       pageController.nextPage(duration: context.onboardingDuration, curve: Curves.easeInOut);
-
-    // TODO LOGIN PAGE GONDER
+    else
+      Navigator.pushNamed(context, 'login');
   }
 }

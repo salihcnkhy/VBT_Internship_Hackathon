@@ -46,7 +46,7 @@ class _OnboardingViewState extends State<OnboardingView> {
       children: onboardingListWidgets,
     );
   }
-
+  
   List<Widget> get onboardingListWidgets {
     return List.generate(
       onboardingViewModel.onboardingList.length,
