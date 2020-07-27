@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Views/login_page/login_page.dart';
+
+import 'core/app/theme/app_theme.dart';
+import 'ui/Views/auth/onboarding_page/view/onboarding_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,8 +9,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Baby Names',
-      home: LoginPage(),
+      home: OnboardingView(),
+      theme: AppTheme.instance.theme,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
