@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vbt_hackathon/core/app/constants/app_constants.dart';
-import 'package:vbt_hackathon/core/app/theme/color_scheme.dart';
+
+import '../constants/app_constants.dart';
+import 'color_scheme.dart';
 
 class AppTheme {
   static AppTheme _instance;
@@ -16,9 +17,11 @@ class AppTheme {
   ThemeData get theme {
     return ThemeData(
       scaffoldBackgroundColor: AppColorScheme.light_khaki,
+      primaryColor: AppColorScheme.orangish,
       fontFamily: AppConstants.fontQuicksand,
       indicatorColor: AppColorScheme.orangish,
       textTheme: TextTheme(
+        headline2: TextStyle(color: AppColorScheme.orangish, fontWeight: FontWeight.bold),
         headline6: TextStyle(
           color: AppColorScheme.denim,
           fontWeight: FontWeight.w700,
