@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/Core/EnvironmentObjects/EnvironmentObj.dart';
 import 'package:vbt_hackathon/Core/Socket.IO/SocketIO.dart';
 import 'package:vbt_hackathon/Helper/Class/uuid_generator.dart';
 import 'package:vbt_hackathon/Models/GameRoom.dart';
 import 'package:vbt_hackathon/Models/Word.dart';
+import 'package:vbt_hackathon/ui/Views/Game/game_room_page/game_room_page.dart';
 import './waiting_room_page.dart';
 
 abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
@@ -61,12 +63,17 @@ abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
     for (var doc in data) {
       words.add(Word.fromJson(doc));
     }
-
+    room.words = words;
+    pushNewScreen(context,
+        screen: GameRoomPage(
+          gameRoom: room,
+        ));
     print(words);
   }
 
   @override
   void dispose() {
+    print("DISPOSE");
     socket.close();
     super.dispose();
   }

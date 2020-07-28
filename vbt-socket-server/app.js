@@ -24,12 +24,7 @@ var c1nps = io.of("c1");
 var c2nps = io.of("c2");
 
 
-io.on("connect", (socket) => {
-    console.log("someone joined io");
-});
 b2nps.on("connect", (socket) => {
-    console.log("someone joined b2");
-
     socket.on("SearchRoom", (data) => {
 
         var isAlreadyInWRP = false;
@@ -37,6 +32,7 @@ b2nps.on("connect", (socket) => {
         for (let i = 0; i < wrp.b2.length; i++) {
             const roomUser = wrp.b2[i];
             if (roomUser.id === data.id) {
+                console.log("Already in queue");
                 isAlreadyInWRP = true;
                 break;
             }
