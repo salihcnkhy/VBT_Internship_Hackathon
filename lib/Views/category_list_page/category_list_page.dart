@@ -7,19 +7,3 @@ class CategoryListPage extends StatefulWidget {
   @override
   CategoryListPageView createState() => new CategoryListPageView();
 }
-
-class Category {
-  String url;
-  String title;
-  String image;
-  final DocumentReference reference;
-  Category.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['url'] != null),
-        assert(map['title'] != null),
-        title = map['title'],
-        image = map['image'],
-        url = map['url'];
-
-  Category.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
-}

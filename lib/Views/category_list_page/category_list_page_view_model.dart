@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vbt_hackathon/Core/Firebase/Firebase.dart';
+import 'package:vbt_hackathon/Models/Category.dart';
 import './category_list_page.dart';
 
 abstract class CategoryListPageViewModel extends State<CategoryListPage>

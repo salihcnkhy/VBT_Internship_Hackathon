@@ -27,40 +27,41 @@ var c2nps = io.of("c2");
 io.on("connect", (socket) => {
     console.log("someone joined io");
 });
-a1nps.on("connect", (socket) => {
-    console.log("someone joined a1");
+b2nps.on("connect", (socket) => {
+    console.log("someone joined b2");
 
     socket.on("SearchRoom", (data) => {
 
         var isAlreadyInWRP = false;
 
-        for (let i = 0; i < wrp.a1.length; i++) {
-            const roomUser = wrp.a1[i];
+        for (let i = 0; i < wrp.b2.length; i++) {
+            const roomUser = wrp.b2[i];
             if (roomUser.id === data.id) {
                 isAlreadyInWRP = true;
                 break;
             }
         }
         if (!isAlreadyInWRP) {
-            wrp.a1.push(new RoomUser(data.id, socket));
-            console.log(wrp.a1.length);
-            if (wrp.a1.length % 2 == 1) {
+            wrp.b2.push(new RoomUser(data.id, socket));
+            console.log(wrp.b2.length);
+            if (wrp.b2.length % 2 == 1) {
                 console.log("room created");
 
             } else {
-                var gamesockets = [wrp.a1.shift(), wrp.a1.shift()];
-
+                var gamesockets = [wrp.b2.shift(), wrp.b2.shift()];
+                var crossUser = 1;
                 for (let i = 0; i < gamesockets.length; i++) {
                     const user = gamesockets[i];
                     user.socket.join(gamesockets[0].id);
                     var data = {
                         roomID: gamesockets[0].id,
-                        role: i == 0 ? "master" : "slave"
+                        otherUser: gamesockets[crossUser].id
                     };
+                    crossUser--;
                     user.socket.emit("setRoomInfo", JSON.stringify(data));
                 }
-                grp.a1.push(new GameRoom(gamesockets[0].id, gamesockets));
-                console.log(grp.a1[0]);
+                grp.b2.push(new GameRoom(gamesockets[0].id, gamesockets));
+                console.log(grp.b2[0]);
                 console.log("room joined to " + gamesockets[0].id);
             }
         }
@@ -70,8 +71,8 @@ a1nps.on("connect", (socket) => {
         console.log(data.words);
 
         var gameRoom; 
-        for (let i = 0; i < grp.a1.length; i++) {
-            const room = grp.a1[i];
+        for (let i = 0; i < grp.b2.length; i++) {
+            const room = grp.b2[i];
             console.log(i.toString() +". Oda: "+room.id);
             console.log(room.id + " === " + data.roomID);
             if(room.id === data.roomID){
@@ -82,7 +83,7 @@ a1nps.on("connect", (socket) => {
         }
 
         gameRoom.words.push(data.words);
-
+        console.log("Olum çalışmıyor ");
         if (gameRoom.words.length == 2) {
             gameRoom.user[0].socket.to(gameRoom.id).emit("setWords", gameRoom.words[1]);
             gameRoom.user[1].socket.to(gameRoom.id).emit("setWords", gameRoom.words[0]);

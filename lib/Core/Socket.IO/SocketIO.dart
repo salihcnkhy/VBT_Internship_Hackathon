@@ -1,27 +1,21 @@
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketIO {
-  // Singleton
-  static final SocketIO _singleton = SocketIO._internal();
-  SocketIO._internal();
-  factory SocketIO() {
-    return _singleton;
-  }
-  // End Singleton
-
   IO.Socket socket;
-
-  void connect(String uri) {
-    this.socket = IO.io(uri, <String, dynamic>{
+  static const url = "http://192.168.1.7:3000/";
+  void connect(String nsp, Function callBack) {
+    this.socket = IO.io(url + nsp, <String, dynamic>{
       'transports': ['websocket'],
     });
     socket.on('connect', (_) {
-      print('connect');
-      socket.emit('msg', 'test');
+      callBack();
     });
     socket.connect();
   }
 
+void close(){
+  socket.close();
+}
   void sendMsg(String event, dynamic data) {
     socket.emit(event, data);
   }

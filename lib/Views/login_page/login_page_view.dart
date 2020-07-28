@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:tuple/tuple.dart';
+import 'package:vbt_hackathon/Core/EnvironmentObjects/EnvironmentObj.dart';
 import 'package:vbt_hackathon/Helper/Views/future_builder_helper.dart';
 import 'package:vbt_hackathon/Helper/Views/progress_bar.dart';
+import 'package:vbt_hackathon/Models/User.dart';
 import 'package:vbt_hackathon/Views/home_page/home_page.dart';
 import './login_page_view_model.dart';
 
@@ -19,6 +21,10 @@ class LoginPageView extends LoginPageViewModel {
           buildTextFields(),
           if (myFuture != null)
             FutureHelper(
+              hasDataCallback: (data) {
+                var env = EnvironmentObjects();
+                env.user = new User(uuid: data.uid);
+              },
               future: myFuture,
               hasDataWidget: HomePage(),
               hasErrorWidget: Text("Error"),

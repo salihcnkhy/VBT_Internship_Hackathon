@@ -16,7 +16,7 @@ class CategoryDetailPageView extends CategoryDetailPageViewModel {
           children: <Widget>[
             RoundedRectWithShadow(
               width: MediaQuery.of(context).size.width - 30,
-              height: MediaQuery.of(context).size.height * 0.52,
+              height: MediaQuery.of(context).size.height * 0.55,
               color: Colors.white24,
               borderRadius: BorderRadius.circular(15),
               child: Padding(
@@ -35,14 +35,16 @@ class CategoryDetailPageView extends CategoryDetailPageViewModel {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.all(20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   RoundedRectWithShadow(
                       onTap: () {
                         pushNewScreen(context,
-                            screen: WaitingRoomPage(),
+                            screen: WaitingRoomPage(
+                              category: widget.category,
+                            ),
                             pageTransitionAnimation:
                                 PageTransitionAnimation.slideRight);
                       },
@@ -52,7 +54,7 @@ class CategoryDetailPageView extends CategoryDetailPageViewModel {
                       ),
                       color: Colors.grey,
                       width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.width * 0.18,
                       borderRadius: BorderRadius.circular(20)),
                   RoundedRectWithShadow(
                       padding: EdgeInsets.all(8),
@@ -61,7 +63,7 @@ class CategoryDetailPageView extends CategoryDetailPageViewModel {
                       ),
                       color: Colors.blue,
                       width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.width * 0.18,
                       borderRadius: BorderRadius.circular(20))
                 ],
               ),
