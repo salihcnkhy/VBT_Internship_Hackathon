@@ -12,6 +12,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget with FirebaseAuthProcess {
   @override
   Widget build(BuildContext context) {
+    print("");
     return MaterialApp(
       theme: AppTheme.instance.theme,
       debugShowCheckedModeBanner: false,
