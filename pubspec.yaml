@@ -29,6 +29,7 @@ dependencies:
   socket_io_client: ^0.9.10
   uuid: ^2.2.0
   http: ^0.12.2
+  settings_ui: ^0.3.0
 
 dev_dependencies:
   flutter_test:
