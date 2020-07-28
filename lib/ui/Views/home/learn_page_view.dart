@@ -6,30 +6,6 @@ class LearnPageView extends LearnPageViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(75),
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xFFFBD04F),
-              Color(0xFFFF7F41),
-            ]),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-          ),
-          // Buraya logo yerleşecek..
-          child: Text(
-            'LOGO',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-            ),
-          ),
-        ),
-      ),
       body: _body(context),
     );
   }
