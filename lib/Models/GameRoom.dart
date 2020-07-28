@@ -1,7 +1,7 @@
 import 'Word.dart';
 
 class GameRoom {
-  final String id;
+  String id;
   List<Word> _words = List();
 
   List<Word> get words => _words;

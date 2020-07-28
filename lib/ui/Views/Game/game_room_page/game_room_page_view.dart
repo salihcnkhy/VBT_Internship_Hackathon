@@ -19,6 +19,9 @@ class GameRoomPageView extends GameRoomPageViewModel {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(start.toString()),
+                  Text((questionIndex + 1).toString() +
+                      "/" +
+                      widget.gameRoom.words.length.toString()),
                   Text(coin.toString())
                 ],
               ),
@@ -26,7 +29,9 @@ class GameRoomPageView extends GameRoomPageViewModel {
             buildWordField(widget.gameRoom.words[questionIndex]),
             Padding(
               padding: EdgeInsets.all(10),
-              child: TextFormField(),
+              child: TextFormField(
+                controller: wordText,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,7 +42,17 @@ class GameRoomPageView extends GameRoomPageViewModel {
                           widget.gameRoom.words[questionIndex].word
                               .toLowerCase()) {
                         setState(() {
-                          questionIndex++;
+                          if (questionIndex ==
+                              widget.gameRoom.words.length - 1) {
+//TODO game is over
+                            print(
+                                "You are finished all words. Wait for other user or wait for time up");
+                          } else {
+                            questionIndex++;
+                            openChars.clear();
+                            setWordBoolList();
+                            wordText.clear();
+                          }
                         });
                       } else {
                         wordText.clear();
@@ -46,16 +61,26 @@ class GameRoomPageView extends GameRoomPageViewModel {
                     child: Text("Try")),
                 FlatButton(
                     onPressed: () {
-                      int wordSize =
-                          widget.gameRoom.words[questionIndex].word.length;
-                      int randomCharIndex = Random().nextInt(wordSize);
+                      if (coin - 10 >= 0) {
+                        int wordSize =
+                            widget.gameRoom.words[questionIndex].word.length;
+                        int randomCharIndex = Random().nextInt(wordSize);
 
-                      while (openChars[randomCharIndex]) {
-                        randomCharIndex = Random().nextInt(wordSize);
+                        if (!openChars.contains(false)) {
+                          //TODO all chars opened
+                        } else {
+                          while (openChars[randomCharIndex]) {
+                            randomCharIndex = Random().nextInt(wordSize);
+                          }
+                          setState(() {
+                            coin -= 10;
+                            openChars[randomCharIndex] = true;
+                          });
+                        }
+                      } else {
+                        // TODO Coin bitti
+                        print("coin bitti");
                       }
-                      setState(() {
-                        openChars[randomCharIndex] = true;
-                      });
                     },
                     child: Text("Get Letter"))
               ],
@@ -85,7 +110,7 @@ class GameRoomPageView extends GameRoomPageViewModel {
         for (var i = 0; i < word.length; i++)
           Expanded(
               child: Container(
-            child: openChars[i] ? Text(word[i]) : Text(""),
+            child: openChars[i] ? Text(word[i]) : Text("_"),
           )),
       ],
     );

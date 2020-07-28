@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/Models/Word.dart';
+import 'package:vbt_hackathon/ui/Views/Home/home_page/home_page.dart';
 import './game_room_page.dart';
 import 'dart:async';
 
@@ -29,14 +31,20 @@ abstract class GameRoomPageViewModel extends State<GameRoomPage> {
       oneSec,
       (Timer timer) => setState(
         () {
-          if (start < 1) {
+          if (start < 0) {
             timer.cancel();
-            // TODO:
+            // times up
+            endGame();
+            pushNewScreen(context, screen: HomePage());
           } else {
             start = start - 1;
           }
         },
       ),
     );
+  }
+
+  void endGame() {
+    widget.socket.sendMsg("endGame", {"roomID": widget.gameRoom.id});
   }
 }

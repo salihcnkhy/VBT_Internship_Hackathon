@@ -13,63 +13,60 @@ class CategoryDetailPageView extends CategoryDetailPageViewModel {
     return Scaffold(
       body: Center(
         heightFactor: 1.05,
-        child: Column(
-          children: <Widget>[
-            RoundedRectWithShadow(
-              width: MediaQuery.of(context).size.width - 30,
-              height: MediaQuery.of(context).size.height * 0.55,
-              color: Colors.white24,
-              borderRadius: BorderRadius.circular(15),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(widget.category.title),
-                    Text(
-                        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et"),
-                    PointsLineChart.withSampleData(),
-                    PointsLineChart.withSampleData(),
-                  ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              RoundedRectWithShadow(
+                color: Colors.white24,
+                borderRadius: BorderRadius.circular(15),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(widget.category.title),
+                      Text(
+                          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et"),
+                      PointsLineChart.withSampleData(),
+                      PointsLineChart.withSampleData(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  RoundedRectWithShadow(
-                      onTap: () {
-                        pushNewScreen(context,
-                            screen: WaitingRoomPage(
-                              category: widget.category,
-                            ),
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.slideRight);
-                      },
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        children: <Widget>[Text("Düelloya Gir")],
-                      ),
-                      color: Colors.grey,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.18,
-                      borderRadius: BorderRadius.circular(20)),
-                  RoundedRectWithShadow(
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        children: <Widget>[Text("Öğren")],
-                      ),
-                      color: Colors.blue,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.18,
-                      borderRadius: BorderRadius.circular(20))
-                ],
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    RoundedRectWithShadow(
+                        onTap: () {
+                          pushNewScreen(context,
+                              screen: WaitingRoomPage(
+                                category: widget.category,
+                              ),
+                              pageTransitionAnimation:
+                                  PageTransitionAnimation.slideRight);
+                        },
+                        padding: EdgeInsets.all(8),
+                        child: Column(
+                          children: <Widget>[Text("Düelloya Gir")],
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20)),
+                    RoundedRectWithShadow(
+                        padding: EdgeInsets.all(8),
+                        child: Column(
+                          children: <Widget>[Text("Öğren")],
+                        ),
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(20))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

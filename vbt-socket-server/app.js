@@ -23,11 +23,13 @@ var b2nps = io.of("b2");
 var c1nps = io.of("c1");
 var c2nps = io.of("c2");
 
-
 b2nps.on("connect", (socket) => {
+
+
     socket.on("SearchRoom", (data) => {
 
         var isAlreadyInWRP = false;
+        var isAlreadyInGRP = false;
 
         for (let i = 0; i < wrp.b2.length; i++) {
             const roomUser = wrp.b2[i];
@@ -37,13 +39,24 @@ b2nps.on("connect", (socket) => {
                 break;
             }
         }
-        if (!isAlreadyInWRP) {
+
+        for (let i = 0; i < grp.b2.length; i++) {
+            const gameRoom = grp.b2[i];
+            if (gameRoom.user[0].id === data.id ||gameRoom.user[1].id === data.id) {
+                console.log("Already in game");
+                isAlreadyInGRP = true;
+                break
+            }
+        }
+        if (!isAlreadyInWRP && !isAlreadyInGRP) {
             wrp.b2.push(new RoomUser(data.id, socket));
             console.log(wrp.b2.length);
             if (wrp.b2.length % 2 == 1) {
-                console.log("room created");
+                console.log("room created by: "+ data.id);
 
             } else {
+                console.log("user came to room: "+ data.id);
+
                 var gamesockets = [wrp.b2.shift(), wrp.b2.shift()];
                 var crossUser = 1;
                 for (let i = 0; i < gamesockets.length; i++) {
@@ -62,7 +75,24 @@ b2nps.on("connect", (socket) => {
             }
         }
     });
+    socket.on("endGame", (data)=>{
+        var index = -1;
+        for (let i = 0; i < grp.b2.length; i++) {
+            const room = grp.b2[i];
+            console.log(room.id + " === " + data.roomID);
+            if(room.id === data.roomID){
+                index = i;
+                break;
+            }
+        }
+        if(index > -1){
+            console.log("game ended"+ data.roomID);
 
+            grp.b2.splice(index,1);
+            socket.disconnect();
+        }
+       
+    });
     socket.on("sendWords", (data) => {
         console.log(data.words);
 
@@ -83,10 +113,8 @@ b2nps.on("connect", (socket) => {
         if (gameRoom.words.length == 2) {
             gameRoom.user[0].socket.to(gameRoom.id).emit("setWords", gameRoom.words[1]);
             gameRoom.user[1].socket.to(gameRoom.id).emit("setWords", gameRoom.words[0]);
-            console.log("All words sended: " + gameRoom.words);
+            //console.log("All words sended: " + gameRoom.words);
 
-        } else {
-            console.log("One User Sended Words: " + gameRoom.words);
         }
     });
 
@@ -96,7 +124,7 @@ b2nps.on("connect", (socket) => {
 
 
 let port_no = 3000;
-http.listen(port_no, "192.168.1.7", () => {
+http.listen(port_no, "172.20.10.3", () => {
     console.log('listening on *:' + port_no.toString());
 });
 
