@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:vbt_socket_client_demo/SocketIO.dart';
 import 'dart:convert';
+
+import 'SocketIO.dart';
 
 void main() => runApp(MyApp());
 

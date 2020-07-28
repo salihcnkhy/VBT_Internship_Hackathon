@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vbt_hackathon/Models/Category.dart';
-import 'package:vbt_hackathon/Views/category_list_page/category_list_page.dart';
 import './category_detail_page_view.dart';
 
 class CategoryDetailPage extends StatefulWidget {

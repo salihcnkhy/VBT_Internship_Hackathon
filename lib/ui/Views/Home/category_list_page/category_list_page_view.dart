@@ -5,7 +5,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/Helper/Views/progress_bar.dart';
 import 'package:vbt_hackathon/Helper/Views/stream_builder_helper.dart';
 import 'package:vbt_hackathon/Models/Category.dart';
-import 'package:vbt_hackathon/Views/category_detail_page/category_detail_page.dart';
+import 'package:vbt_hackathon/ui/Views/Home/category_detail_page/category_detail_page.dart';
 import './category_list_page_view_model.dart';
 import 'category_list_page.dart';
 

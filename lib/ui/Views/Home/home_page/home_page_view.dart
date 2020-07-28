@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:vbt_hackathon/Views/category_list_page/category_list_page.dart';
+import 'package:vbt_hackathon/ui/Views/Home/category_list_page/category_list_page.dart';
 import './home_page_view_model.dart';
 
 class HomePageView extends HomePageViewModel {
