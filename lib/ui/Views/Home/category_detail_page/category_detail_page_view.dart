@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/Helper/Views/chart.dart';
 import 'package:vbt_hackathon/Helper/Views/roundedrect_with_shadow.dart';
-import 'package:vbt_hackathon/ui/Views/Home/Game/waiting_room_page/waiting_room_page.dart';
+import 'package:vbt_hackathon/ui/Views/Game/waiting_room_page/waiting_room_page.dart';
 
 import 'category_detail_page_view_model.dart';
 
