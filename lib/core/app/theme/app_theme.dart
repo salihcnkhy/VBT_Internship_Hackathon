@@ -20,20 +20,23 @@ class AppTheme {
       primaryColor: AppColorScheme.orangish,
       fontFamily: AppConstants.fontQuicksand,
       indicatorColor: AppColorScheme.orangish,
+      accentColor: AppColorScheme.light_khaki,
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(color: AppColorScheme.denimOpacity50, fontWeight: FontWeight.bold),
+        hintStyle: TextStyle(color: AppColorScheme.denimOpacity50, fontWeight: FontWeight.bold),
+      ),
+      colorScheme: ColorScheme.light(
+        background: AppColorScheme.light_khaki,
+        primary: AppColorScheme.orangish,
+        secondary: AppColorScheme.denim,
+        surface: AppColorScheme.github_black_color,
+      ),
       textTheme: TextTheme(
         headline2: TextStyle(color: AppColorScheme.orangish, fontWeight: FontWeight.bold),
-        headline6: TextStyle(
-          color: AppColorScheme.denim,
-          fontWeight: FontWeight.w700,
-        ),
-        subtitle1: TextStyle(
-          color: AppColorScheme.denim,
-          fontWeight: FontWeight.w500,
-        ),
-        button: TextStyle(
-          color: AppColorScheme.denim,
-          fontWeight: FontWeight.bold,
-        ),
+        headline5: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.w700),
+        headline6: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.w700),
+        subtitle1: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.w500),
+        button: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.bold),
       ),
     );
   }
