@@ -34,27 +34,28 @@ class _LoginPageViewState extends State<LoginPageView> {
   Widget body(BuildContext context) {
     return Stack(
       children: <Widget>[
-        if (loginPageViewModel.myFuture != null) buildAppBar,
+        buildAppBar,
         buildLoginRegister,
-        FutureBuilder(
-          future: loginPageViewModel.myFuture,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text("Success",
-                  style: TextStyle(
-                    fontSize: 27,
-                    fontWeight: FontWeight.bold,
-                  ));
-            } else if (snapshot.hasError) {
-              return Text("Error Occured => " + snapshot.error.toString(),
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                  ));
-            }
-            return buildBackdropFilter;
-          },
-        ),
+        if (loginPageViewModel.myFuture != null)
+          FutureBuilder(
+            future: loginPageViewModel.myFuture,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text("Success",
+                    style: TextStyle(
+                      fontSize: 27,
+                      fontWeight: FontWeight.bold,
+                    ));
+              } else if (snapshot.hasError) {
+                return Text("Error Occured => " + snapshot.error.toString(),
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ));
+              }
+              return buildBackdropFilter;
+            },
+          ),
       ],
     );
   }
