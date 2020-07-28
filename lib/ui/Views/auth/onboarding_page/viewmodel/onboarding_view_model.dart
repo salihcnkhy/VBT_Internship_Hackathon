@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../core/app/constants/enum_constants.dart';
 import '../../../../../core/app/base/base_view_model.dart';
 import '../../../../../core/app/constants/image_constants.dart';
 import '../../../../../core/app/constants/string_constants.dart';
@@ -12,11 +14,15 @@ part 'onboarding_view_model.g.dart';
 class OnboardingViewModel = _OnboardingViewModelBase with _$OnboardingViewModel;
 
 abstract class _OnboardingViewModelBase with Store, BaseViewModel {
-  PageController pageController;
   List<OnboardingModel> onboardingList = [];
+  PageController pageController;
+  SharedPreferences sharedPreferences;
 
   @observable
   int currentPage = 0;
+
+  @observable
+  bool isDone = false;
 
   @computed
   bool get isNotLastPage => currentPage + 1 != onboardingList.length;
@@ -30,7 +36,7 @@ abstract class _OnboardingViewModelBase with Store, BaseViewModel {
     this.context = context;
   }
 
-  init() {
+  init() async {
     pageController = PageController();
     onboardingList.add(OnboardingModel(
         StringConstanst.instance.onboardingPageOneTitle,
@@ -44,6 +50,8 @@ abstract class _OnboardingViewModelBase with Store, BaseViewModel {
         StringConstanst.instance.onboardingPageThreeTitle,
         StringConstanst.instance.onboardingPageThreeSubtitle,
         ImageConstants.instance.onboardingPageThreeSVG));
+    sharedPreferences = await SharedPreferences.getInstance();
+    isDone = sharedPreferences.getBool("$EnumSharedPreferences.isDoneOnboarding");
   }
 
   @action
@@ -52,7 +60,10 @@ abstract class _OnboardingViewModelBase with Store, BaseViewModel {
   void onPageButtonPressed() {
     if (isNotLastPage)
       pageController.nextPage(duration: context.onboardingDuration, curve: Curves.easeInOut);
-
-    // TODO LOGIN PAGE GONDER
+    else {
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      isDone = true;
+      sharedPreferences.setBool("$EnumSharedPreferences.isDoneOnboarding", true);
+    }
   }
 }

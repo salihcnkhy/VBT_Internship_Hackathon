@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vbt_hackathon/core/app/constants/app_constants.dart';
-import 'package:vbt_hackathon/core/app/theme/color_scheme.dart';
+
+import '../constants/app_constants.dart';
+import 'color_scheme.dart';
 
 class AppTheme {
   static AppTheme _instance;
@@ -16,21 +17,26 @@ class AppTheme {
   ThemeData get theme {
     return ThemeData(
       scaffoldBackgroundColor: AppColorScheme.light_khaki,
+      primaryColor: AppColorScheme.orangish,
       fontFamily: AppConstants.fontQuicksand,
       indicatorColor: AppColorScheme.orangish,
+      accentColor: AppColorScheme.light_khaki,
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(color: AppColorScheme.denimOpacity50, fontWeight: FontWeight.bold),
+        hintStyle: TextStyle(color: AppColorScheme.denimOpacity50, fontWeight: FontWeight.bold),
+      ),
+      colorScheme: ColorScheme.light(
+        background: AppColorScheme.light_khaki,
+        primary: AppColorScheme.orangish,
+        secondary: AppColorScheme.denim,
+        surface: AppColorScheme.github_black_color,
+      ),
       textTheme: TextTheme(
-        headline6: TextStyle(
-          color: AppColorScheme.denim,
-          fontWeight: FontWeight.w700,
-        ),
-        subtitle1: TextStyle(
-          color: AppColorScheme.denim,
-          fontWeight: FontWeight.w500,
-        ),
-        button: TextStyle(
-          color: AppColorScheme.denim,
-          fontWeight: FontWeight.bold,
-        ),
+        headline2: TextStyle(color: AppColorScheme.orangish, fontWeight: FontWeight.bold),
+        headline5: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.w700),
+        headline6: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.w700),
+        subtitle1: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.w500),
+        button: TextStyle(color: AppColorScheme.denim, fontWeight: FontWeight.bold),
       ),
     );
   }

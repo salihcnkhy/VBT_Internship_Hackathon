@@ -2,19 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:vbt_hackathon/ui/Views/home/learn_page.dart';
 import 'package:vbt_hackathon/ui/Views/home/learn_page_view.dart';
 
+import 'Core/Firebase/Firebase.dart';
 import 'core/app/theme/app_theme.dart';
+import 'ui/Views/auth/login_page/view/login_page_view.dart';
 import 'ui/Views/auth/onboarding_page/view/onboarding_view.dart';
-import 'ui/Views/home/learn_page_view.dart';
+import 'ui/Views/auth/register_page/register_page.dart';
+import 'ui/Views/auth/splash_page/view/splash_view.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with FirebaseAuthProcess {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LearnPage(),
       theme: AppTheme.instance.theme,
       debugShowCheckedModeBanner: false,
+      initialRoute: '/splash',
+      routes: {
+        '/splash': (context) => SplashView(),
+        '/onboarding': (context) => OnboardingView(),
+        '/login': (context) => LoginPageView(),
+        '/register': (context) => RegisterPage(),
+      },
     );
   }
+  // FutureHelper(
+  //       future: checkUser(),
+  //       hasDataWidget: HomePage(),
+  //       hasErrorWidget: Text("Error"),
+  //       progressWidget: DefaultProgressBar(),
+  //     ),
 }

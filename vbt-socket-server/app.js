@@ -3,10 +3,18 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
 
-let RoomUser = require("./models/waiting_room_user");
-let WaitingRoomParams = require("./helpers/helperParams").WaitingRoomParams;
+let RoomUser = require("./models/waiting_room_user").RoomUser;
+let GameRoom = require("./models/game_room").GameRoom;
 
+let WaitingRoomParams = require("./helpers/helperParams").WaitingRoomParams;
+let GameRoomParams = require("./helpers/helperParams").GameRoomParams;
+
+
+//Add RoomUser into wrp
 var wrp = new WaitingRoomParams();
+
+//add GameRoom into grp
+var grp = new GameRoomParams();
 
 var a1nps = io.of("a1");
 var a2nps = io.of("a2");
@@ -19,47 +27,71 @@ var c2nps = io.of("c2");
 io.on("connect", (socket) => {
     console.log("someone joined io");
 });
-a1nps.on("connect", (socket) => {
-    console.log("someone joined a1");
+b2nps.on("connect", (socket) => {
+    console.log("someone joined b2");
 
     socket.on("SearchRoom", (data) => {
 
         var isAlreadyInWRP = false;
 
-        for (let i = 0; i < wrp.a1.length; i++) {
-            const roomUser = wrp.a1[i];
+        for (let i = 0; i < wrp.b2.length; i++) {
+            const roomUser = wrp.b2[i];
             if (roomUser.id === data.id) {
                 isAlreadyInWRP = true;
                 break;
             }
         }
         if (!isAlreadyInWRP) {
-            wrp.a1.push(new RoomUser(data.id, socket));
-            console.log(wrp.a1.length);
-            if (wrp.a1.length % 2 == 1) {
+            wrp.b2.push(new RoomUser(data.id, socket));
+            console.log(wrp.b2.length);
+            if (wrp.b2.length % 2 == 1) {
                 console.log("room created");
-                socket.join(data.id);
-                socket.emit("setRoomInfo", data);
-            } else {
-                var gamesockets = [wrp.a1.shift(), wrp.a1.shift()];
 
+            } else {
+                var gamesockets = [wrp.b2.shift(), wrp.b2.shift()];
+                var crossUser = 1;
                 for (let i = 0; i < gamesockets.length; i++) {
                     const user = gamesockets[i];
                     user.socket.join(gamesockets[0].id);
                     var data = {
                         roomID: gamesockets[0].id,
-                        role: i == 0 ? "master" : "slave"
+                        otherUser: gamesockets[crossUser].id
                     };
-                    user.socket.emit("setRoomInfo",JSON.stringify(data));
+                    crossUser--;
+                    user.socket.emit("setRoomInfo", JSON.stringify(data));
                 }
+                grp.b2.push(new GameRoom(gamesockets[0].id, gamesockets));
+                console.log(grp.b2[0]);
                 console.log("room joined to " + gamesockets[0].id);
             }
         }
     });
 
-    socket.on("sendWords",(data)=>{
+    socket.on("sendWords", (data) => {
         console.log(data.words);
-        socket.to(data.roomID).emit("getWords",data.words);
+
+        var gameRoom; 
+        for (let i = 0; i < grp.b2.length; i++) {
+            const room = grp.b2[i];
+            console.log(i.toString() +". Oda: "+room.id);
+            console.log(room.id + " === " + data.roomID);
+            if(room.id === data.roomID){
+                console.log("Room Found.");
+                gameRoom = room;
+                break;
+            }
+        }
+
+        gameRoom.words.push(data.words);
+        console.log("Olum çalışmıyor ");
+        if (gameRoom.words.length == 2) {
+            gameRoom.user[0].socket.to(gameRoom.id).emit("setWords", gameRoom.words[1]);
+            gameRoom.user[1].socket.to(gameRoom.id).emit("setWords", gameRoom.words[0]);
+            console.log("All words sended: " + gameRoom.words);
+
+        } else {
+            console.log("One User Sended Words: " + gameRoom.words);
+        }
     });
 
 

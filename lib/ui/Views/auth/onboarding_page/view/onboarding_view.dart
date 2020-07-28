@@ -15,7 +15,6 @@ class OnboardingView extends StatefulWidget {
 
 class _OnboardingViewState extends State<OnboardingView> {
   OnboardingViewModel onboardingViewModel;
-
   @override
   Widget build(BuildContext context) {
     return BaseView<OnboardingViewModel>(
