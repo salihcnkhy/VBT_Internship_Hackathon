@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/app/theme/app_theme.dart';
-import 'ui/Views/auth/login_page/login_page.dart';
+import 'ui/Views/auth/login_page/view/login_page_view.dart';
 import 'ui/Views/auth/onboarding_page/view/onboarding_view.dart';
 import 'ui/Views/auth/register_page/register_page.dart';
 import 'ui/Views/auth/splash_page/view/splash_view.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash': (context) => SplashView(),
         '/onboarding': (context) => OnboardingView(),
-        '/login': (context) => LoginPage(),
+        '/login': (context) => LoginPageView(),
         '/register': (context) => RegisterPage(),
       },
     );
