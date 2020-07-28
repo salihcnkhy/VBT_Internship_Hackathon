@@ -50,7 +50,8 @@ class _OnboardingViewState extends State<OnboardingView> {
   List<Widget> get onboardingListWidgets {
     return List.generate(
       onboardingViewModel.onboardingList.length,
-      (index) => OnboardingPageView(onboardingModel: onboardingViewModel.onboardingList[index]),
+      (index) => OnboardingPageView(
+          onboardingModel: onboardingViewModel.onboardingList[index]),
     );
   }
 
