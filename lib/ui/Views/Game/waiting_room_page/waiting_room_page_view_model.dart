@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/Core/EnvironmentObjects/EnvironmentObj.dart';
 import 'package:vbt_hackathon/Core/Socket.IO/SocketIO.dart';
 import 'package:vbt_hackathon/Helper/Class/uuid_generator.dart';
 import 'package:vbt_hackathon/Models/GameRoom.dart';
 import 'package:vbt_hackathon/Models/Word.dart';
+import 'package:vbt_hackathon/ui/Views/Game/game_room_page/game_room_page.dart';
 import './waiting_room_page.dart';
 
 abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
@@ -18,14 +20,29 @@ abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
     print("init");
     super.initState();
     infoText = "Connecting to " + widget.category.id + "...";
-    socket.connect(widget.category.id, _connectionCallBack);
+  }
+
+  void dataCallBack(data) {
+    if (room == null) {
+      room = GameRoom();
+      List<Word> wordList = List();
+      wordList = data.words;
+      wordList.shuffle();
+      room.words.add(wordList.removeLast());
+      room.words.add(wordList.removeLast());
+      room.words.add(wordList.removeLast());
+      room.words.add(wordList.removeLast());
+      room.words.add(wordList.removeLast());
+      print("Words Size: " + room.words.length.toString());
+      print(room.words.map((e) => print(e.word)));
+      socket.connect(widget.category.id, _connectionCallBack);
+    }
   }
 
   void _connectionCallBack() {
     socket.addListener("setRoomInfo", _setRoomInfoCallBack);
     print(env.user.uuid);
     socket.sendMsg("SearchRoom", {"id": env.user.uuid});
-
     setState(() {
       infoText =
           "Connected to " + widget.category.id + ".\n" + "Searcing for player";
@@ -35,24 +52,13 @@ abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
   void _setRoomInfoCallBack(data) {
     print(data);
     Map<String, dynamic> map = jsonDecode(data);
+    room.id = map["roomID"];
 
-    room = GameRoom(id: map["roomID"]);
-    room.words = _createDummy();
     socket.addListener("setWords", _setGameRoomWords);
     socket.sendMsg("sendWords", {
       "roomID": room.id,
       "words": room.words.map((e) => e.toJson()).toList()
     });
-  }
-
-  List<Word> _createDummy() {
-    List<Word> word = List();
-    word.add(Word(word: "Apple"));
-    word.add(Word(word: "Hi"));
-    word.add(Word(word: "Gool"));
-    word.add(Word(word: "Bool"));
-    word.add(Word(word: "True"));
-    return word;
   }
 
   void _setGameRoomWords(data) {
@@ -61,12 +67,18 @@ abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
     for (var doc in data) {
       words.add(Word.fromJson(doc));
     }
-
+    room.words = words;
+    pushNewScreen(context,
+        screen: GameRoomPage(
+          gameRoom: room,
+          socket: socket,
+        ));
     print(words);
   }
 
   @override
   void dispose() {
+    print("DISPOSE");
     socket.close();
     super.dispose();
   }

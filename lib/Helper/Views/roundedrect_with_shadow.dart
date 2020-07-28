@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class RoundedRectWithShadow extends StatelessWidget {
   const RoundedRectWithShadow(
       {Key key,
-      @required this.width,
-      @required this.height,
       this.padding = const EdgeInsets.all(0),
       this.shadow = const BoxShadow(
           blurRadius: 3,
@@ -14,24 +12,23 @@ class RoundedRectWithShadow extends StatelessWidget {
       @required this.borderRadius,
       this.child,
       this.color = const Color.fromRGBO(255, 255, 255, 1),
-      this.onTap})
+      this.onTap,
+      this.flex = 1})
       : super(key: key);
 
-  final double width;
-  final double height;
   final EdgeInsets padding;
   final BoxShadow shadow;
   final BorderRadius borderRadius;
   final Widget child;
   final Color color;
   final Function onTap;
+  final int flex;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
-        width: width,
-        height: height,
+      child: Expanded(
+        flex: flex,
         child: Container(
           padding: padding,
           decoration: BoxDecoration(

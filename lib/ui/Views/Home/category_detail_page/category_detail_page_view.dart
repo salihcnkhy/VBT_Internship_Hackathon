@@ -75,7 +75,6 @@ class CategoryDetailPageView extends CategoryDetailPageViewModel {
             ),
           )
         ],
-      ),
     );
   }
 }
