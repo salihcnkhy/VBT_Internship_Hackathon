@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Core/Firebase/Firebase.dart';
 import 'core/app/theme/app_theme.dart';
 import 'ui/Views/auth/login_page/view/login_page_view.dart';
 import 'ui/Views/auth/onboarding_page/view/onboarding_view.dart';
@@ -8,9 +9,10 @@ import 'ui/Views/auth/splash_page/view/splash_view.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with FirebaseAuthProcess {
   @override
   Widget build(BuildContext context) {
+    print("");
     return MaterialApp(
       theme: AppTheme.instance.theme,
       debugShowCheckedModeBanner: false,
@@ -23,4 +25,10 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+  // FutureHelper(
+  //       future: checkUser(),
+  //       hasDataWidget: HomePage(),
+  //       hasErrorWidget: Text("Error"),
+  //       progressWidget: DefaultProgressBar(),
+  //     ),
 }

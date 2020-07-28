@@ -7,6 +7,11 @@ class FirestoreProcess {
   Stream<QuerySnapshot> getQuerySnapshot(String collectionID) {
     return _firestore.collection(collectionID).snapshots();
   }
+
+  Future<DocumentReference> addDocument(
+      String collectionID, Map<String, dynamic> data) {
+    return _firestore.collection(collectionID).add(data);
+  }
 }
 
 class FirebaseAuthProcess {
@@ -23,6 +28,11 @@ class FirebaseAuthProcess {
     final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
             email: email, password: password))
         .user;
+    return user;
+  }
+
+  Future<FirebaseUser> checkUser() async {
+    final FirebaseUser user = (await _auth.currentUser());
     return user;
   }
 }

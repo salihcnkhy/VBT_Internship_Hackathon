@@ -1,5 +1,10 @@
 
-module.exports = function RoomUser(id,socket){
+function RoomUser(id,socket){
     this.id = id;
     this.socket = socket
 }
+
+
+module.exports.RoomUser = RoomUser;
+
+

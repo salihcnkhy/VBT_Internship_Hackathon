@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:vbt_hackathon/Helper/Views/future_builder_helper.dart';
+import 'package:vbt_hackathon/Helper/Views/progress_bar.dart';
 import './register_page_view_model.dart';
 
 class RegisterPageView extends RegisterPageViewModel {
@@ -13,29 +15,21 @@ class RegisterPageView extends RegisterPageViewModel {
         children: <Widget>[
           buildTextFields(),
           if (myFuture != null)
-            FutureBuilder(
-              //You can use setState There
+            FutureHelper(
               future: myFuture,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  print("User Data" + snapshot.data.toString());
-                  return Text("Success",
-                      style: TextStyle(
-                        fontSize: 27,
-                        fontWeight: FontWeight.bold,
-                      ));
-                } else if (snapshot.hasError) {
-                  print("Hata Data" + snapshot.error.toString());
-
-                  return Text("Error Occured => " + snapshot.error.toString(),
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                      ));
-                }
-                return buildBackdropFilter();
-              },
-            )
+              hasDataCallback: registerCallBack,
+              hasDataWidget: Text("Success",
+                  style: TextStyle(
+                    fontSize: 27,
+                    fontWeight: FontWeight.bold,
+                  )),
+              hasErrorWidget: Text("Erorr",
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  )),
+              progressWidget: DefaultProgressBar(),
+            ),
         ],
       )),
     );
