@@ -33,4 +33,6 @@ class StringConstanst {
   String get signUpWithGithub => "Github ile kayıt ol";
   // AUTH REGION #
 
+  String get b3level =>
+      "B2 seviyesi, dördüncü seviye olarak tanımlanmaktadır. Orta seviye üstü olup B2 İngilizce seviyesi bir birey akademik ve profesyonel konularda oldukça rahattır.";
 }
