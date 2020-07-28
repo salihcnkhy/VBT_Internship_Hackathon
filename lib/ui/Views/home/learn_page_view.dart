@@ -41,38 +41,42 @@ Widget _body(context) {
     child: Column(
       children: <Widget>[
         kelimelerContainer(context),
-        Padding(
-          padding: EdgeInsets.only(
-            left: 30,
-            right: 30,
-            top: 40,
-          ),
-          child: InkWell(
-            onTap: () {},
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.06,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(colors: [
-                  Color(0xFFFBD04F),
-                  Color(0xFFFF7F41),
-                ]),
-              ),
-              child: Text(
-                'Öğrenmeye Başlayalım',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
+        ogrenmeyeBaslaButton(context),
+      ],
+    ),
+  );
+}
+
+Padding ogrenmeyeBaslaButton(context) {
+  return Padding(
+    padding: EdgeInsets.only(
+      left: 30,
+      right: 30,
+      top: 40,
+    ),
+    child: InkWell(
+      onTap: () {},
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.06,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(colors: [
+            Color(0xFFFBD04F),
+            Color(0xFFFF7F41),
+          ]),
+        ),
+        child: Text(
+          'Öğrenmeye Başlayalım',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Quicksand',
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
           ),
         ),
-      ],
+      ),
     ),
   );
 }
@@ -85,12 +89,15 @@ Padding kelimelerContainer(context) {
     child: Container(
       height: MediaQuery.of(context).size.height * 0.4,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black.withOpacity(0.5)),
+        border: Border.all(
+          color: Color(0xFFFBD04F),
+        ),
         color: Colors.white,
       ),
       child: Column(
         children: <Widget>[
           textYenileAndYenileButton(),
+          // Kelimerin gösterileceği yer
         ],
       ),
     ),
@@ -113,7 +120,7 @@ Padding textYenileAndYenileButton() {
             Text(
               'Yenile',
               style: TextStyle(
-                color: Color(0xFF396A78),
+                color: Color(0xFFFF7F41),
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
                 fontFamily: 'Quicksand',
@@ -123,7 +130,7 @@ Padding textYenileAndYenileButton() {
               onTap: () {},
               child: Icon(
                 CupertinoIcons.refresh,
-                color: Color(0xFF396A78),
+                color: Color(0xFFFF7F41),
                 size: 30,
               ),
             ),
