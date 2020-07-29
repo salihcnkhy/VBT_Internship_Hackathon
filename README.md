@@ -20,6 +20,6 @@
 - Zeplin
 
 ## UYGULAMANIN İÇERDİĞİ UI KISIMLARI
-Login Ekranı
+#### Login Ekranı  
 ![login view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/login_view.png)
 
