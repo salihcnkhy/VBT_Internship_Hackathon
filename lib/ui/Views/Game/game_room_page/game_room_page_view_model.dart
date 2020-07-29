@@ -35,7 +35,6 @@ abstract class GameRoomPageViewModel extends State<GameRoomPage> {
             timer.cancel();
             // times up
             endGame();
-            pushNewScreen(context, screen: HomePage());
           } else {
             start = start - 1;
           }
@@ -46,5 +45,7 @@ abstract class GameRoomPageViewModel extends State<GameRoomPage> {
 
   void endGame() {
     widget.socket.sendMsg("endGame", {"roomID": widget.gameRoom.id});
+                pushNewScreen(context, screen: HomePage());
+
   }
 }
