@@ -20,7 +20,7 @@ class AppTheme {
       primaryColor: AppColorScheme.orangish,
       fontFamily: AppConstants.fontQuicksand,
       indicatorColor: AppColorScheme.orangish,
-      accentColor: AppColorScheme.light_khaki,
+      accentColor: AppColorScheme.denim,
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: AppColorScheme.denimOpacity50, fontWeight: FontWeight.bold),
         hintStyle: TextStyle(color: AppColorScheme.denimOpacity50, fontWeight: FontWeight.bold),

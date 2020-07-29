@@ -114,7 +114,7 @@ class _LoginPageViewState extends State<LoginPageView> {
             buildTextTitle,
             buildTextFormFieldLogin,
             buildTextFormFieldPassword,
-            ButtonBar(children: [buildFlatButtonLoginWithGithub, buildFlatButtonLogin]),
+            ButtonBar(children: [buildFlatButtonLogin]),
           ],
         ),
       ),
@@ -145,17 +145,6 @@ class _LoginPageViewState extends State<LoginPageView> {
       obscureText: true,
       controller: loginPageViewModel.password,
       decoration: InputDecoration(labelText: StringConstanst.instance.password),
-    );
-  }
-
-  FlatButton get buildFlatButtonLoginWithGithub {
-    return FlatButton(
-      onPressed: loginPageViewModel.loginButtonPressed,
-      shape: StadiumBorder(side: BorderSide()),
-      child: Text(
-        StringConstanst.instance.signInWithGithub,
-        style: context.textTheme.button.copyWith(color: context.colorScheme.surface),
-      ),
     );
   }
 
