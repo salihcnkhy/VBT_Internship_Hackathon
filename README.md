@@ -1,28 +1,25 @@
-UYGULAMA İSMİ
+# UYGULAMA İSMİ
 
-UYGULAMA AMACI:
-----------
+# UYGULAMA AMACI:
 - İngilizce kelime öğretmek
 - İngilizce kelime öğretirken eğlenceli hale getirmek
 - İngilizce kelime öğretmek için online kelime tahmin etme 
 
-UYGULAMANIN İÇERDİĞİ TEKNOLOJİLER:
--------------
-*Back-end tarafı:
+# UYGULAMANIN İÇERDİĞİ TEKNOLOJİLER:
+### *Back-end tarafı:
 - Socket programlama için nodejs socket.io modülü
 - Firebase kullanarak; 
 	- İngilizce kelimeleri ve türkçe karşılıkları
 	- User bilgileri gerçek zamanlı olarak saklıyoruz.
 
-*Front-end tarafı:
+## *Front-end tarafı:
 - Flutter
 
-*Tasarım araçları:
+## *Tasarım araçları:
 - Adobe XD
 - Zeplin
 
-UYGULAMANIN İÇERDİĞİ UI KISIMLARI
------------------
+## UYGULAMANIN İÇERDİĞİ UI KISIMLARI
 
 
 
