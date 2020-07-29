@@ -44,7 +44,8 @@ class GameRoomPageView extends GameRoomPageViewModel {
                         setState(() {
                           if (questionIndex ==
                               widget.gameRoom.words.length - 1) {
-//TODO game is over
+                            //TODO game is over
+                            endGame();
                             print(
                                 "You are finished all words. Wait for other user or wait for time up");
                           } else {
@@ -68,6 +69,9 @@ class GameRoomPageView extends GameRoomPageViewModel {
 
                         if (!openChars.contains(false)) {
                           //TODO all chars opened
+                          setState(() {
+                            questionIndex++;
+                          });
                         } else {
                           while (openChars[randomCharIndex]) {
                             randomCharIndex = Random().nextInt(wordSize);
