@@ -1,16 +1,31 @@
-# vbt_hackathon
+# UYGULAMA İSMİ
 
-A new Flutter project.
+# UYGULAMA AMACI:
+- İngilizce kelime öğretmek
+- İngilizce kelime öğretirken eğlenceli hale getirmek
+- İngilizce kelime öğretmek için online kelime tahmin etme 
 
-## Getting Started
+# UYGULAMANIN İÇERDİĞİ TEKNOLOJİLER:
+### *Back-end tarafı:
+- Socket programlama için nodejs socket.io modülü
+- Firebase kullanarak; 
+	- İngilizce kelimeleri ve türkçe karşılıkları
+	- User bilgileri gerçek zamanlı olarak saklıyoruz.
 
-This project is a starting point for a Flutter application.
+## *Front-end tarafı:
+- Flutter
 
-A few resources to get you started if this is your first Flutter project:
+## *Tasarım araçları:
+- Adobe XD
+- Zeplin
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## UYGULAMANIN İÇERDİĞİ UI KISIMLARI
+### Bilgi Verme Ekranı
+![onboarding view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/onboarding_view.png)
+### Kullanıcı Giriş Ekranı  
+![login view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/login_view.png)
+### Seviyeye Göre İstatistik Verilerinin Olduğu, Eğitim Ve Online Düello'ya Giriş Ekranı
+![statistical view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/statistical_view.png)
+### Ayarlar Ekranı
+![settings view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/settings_view.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

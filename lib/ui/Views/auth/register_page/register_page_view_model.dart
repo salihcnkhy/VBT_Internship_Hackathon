@@ -16,7 +16,7 @@ abstract class RegisterPageViewModel extends State<RegisterPage>
       FocusScopeNode currentFocus = FocusScope.of(context);
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
-      }
+      } 
       myFuture = register(email.text, password.text);
     });
   }

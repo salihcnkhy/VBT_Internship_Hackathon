@@ -86,10 +86,15 @@ b2nps.on("connect", (socket) => {
             }
         }
         if(index > -1){
-            console.log("game ended"+ data.roomID);
-
+            console.log("game ended:  "+ data.roomID);
+            
+            var users = grp.b2[index].user;
+            users.forEach(user => {
+                user.socket.leaveAll();
+                user.socket.disconnect();
+                console.log("socket disconnected from all room");
+            });
             grp.b2.splice(index,1);
-            socket.disconnect();
         }
        
     });

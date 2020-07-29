@@ -79,6 +79,9 @@ class GameRoomPageView extends GameRoomPageViewModel {
                           setState(() {
                             coin -= 10;
                             openChars[randomCharIndex] = true;
+                            if (!openChars.contains(false)) {
+                              questionIndex++;
+                            }
                           });
                         }
                       } else {

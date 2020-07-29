@@ -1,13 +1,12 @@
 import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:vbt_hackathon/Helper/Views/progress_bar.dart';
-import 'package:vbt_hackathon/Helper/Views/stream_builder_helper.dart';
-import 'package:vbt_hackathon/Models/Category.dart';
-import 'package:vbt_hackathon/ui/Views/Home/category_detail_page/category_detail_page.dart';
+import 'package:vbt_hackathon/core/extensions/build_context_extension.dart';
+import '../../../../Helper/Views/progress_bar.dart';
+import '../../../../Helper/Views/stream_builder_helper.dart';
+import '../../../../Models/Category.dart';
+import '../../Home/category_detail_page/category_detail_page.dart';
 import './category_list_page_view_model.dart';
-import 'category_list_page.dart';
 
 class CategoryListPageView extends CategoryListPageViewModel {
   @override
@@ -27,8 +26,7 @@ class CategoryListPageView extends CategoryListPageViewModel {
       crossAxisCount: 2,
       crossAxisSpacing: 25,
       mainAxisSpacing: 25,
-      children:
-          snapshot.map((category) => buildGridViewCard(category)).toList(),
+      children: snapshot.map((category) => buildGridViewCard(category)).toList(),
     );
   }
 
@@ -37,27 +35,26 @@ class CategoryListPageView extends CategoryListPageViewModel {
       onTap: () {
         print(category.title);
         print(category.url);
-        pushNewScreen(context,
-            screen: CategoryDetailPage(
-              category: category,
-            ),
-            withNavBar: true,
-            pageTransitionAnimation: PageTransitionAnimation.slideUp);
+        pushNewScreen(
+          context,
+          screen: CategoryDetailPage(category: category),
+          withNavBar: true,
+          pageTransitionAnimation: PageTransitionAnimation.slideUp,
+        );
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
-        elevation: 4,
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(category.title),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.network(category.image),
-              )
-            ],
-          ),
+        elevation: 5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(category.title, style: context.textTheme.headline6),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Image.network(category.image),
+            )
+          ],
         ),
       ),
     );

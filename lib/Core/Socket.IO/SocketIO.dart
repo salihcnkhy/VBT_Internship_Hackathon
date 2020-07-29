@@ -2,7 +2,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketIO {
   IO.Socket socket;
-  static const url = "http://172.20.10.3:3000/";
+  static const url = "http://34.107.33.146:3000/";
   void connect(String nsp, Function callBack) {
     this.socket = IO.io(url + nsp, <String, dynamic>{
       'transports': ['websocket'],

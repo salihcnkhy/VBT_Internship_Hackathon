@@ -67,8 +67,7 @@ class _LoginPageViewState extends State<LoginPageView> {
     );
   }
 
-  Widget get buildAppBarContainer =>
-      Container(decoration: appBarBoxDecoration, child: buildLogo);
+  Widget get buildAppBarContainer => Container(decoration: appBarBoxDecoration, child: buildLogo);
 
   BoxDecoration get appBarBoxDecoration {
     return BoxDecoration(
@@ -78,21 +77,16 @@ class _LoginPageViewState extends State<LoginPageView> {
     );
   }
 
-  BorderRadius get baseBorderRadius40 =>
-      BorderRadius.only(bottomLeft: Radius.circular(40));
+  BorderRadius get baseBorderRadius40 => BorderRadius.only(bottomLeft: Radius.circular(40));
 
-  BoxShadow get appBarBoxShadow => BoxShadow(
-      color: Colors.black26,
-      offset: Offset(0, 1),
-      blurRadius: 6,
-      spreadRadius: 0);
+  BoxShadow get appBarBoxShadow =>
+      BoxShadow(color: Colors.black26, offset: Offset(0, 1), blurRadius: 6, spreadRadius: 0);
 
   Widget get buildLogo {
     return Center(
       child: Text(
         "Logo".toUpperCase(),
-        style: context.textTheme.headline2
-            .copyWith(color: AppColorScheme.light_khaki),
+        style: context.textTheme.headline2.copyWith(color: AppColorScheme.light_khaki),
       ),
     );
   }
@@ -120,10 +114,7 @@ class _LoginPageViewState extends State<LoginPageView> {
             buildTextTitle,
             buildTextFormFieldLogin,
             buildTextFormFieldPassword,
-            ButtonBar(children: [
-              buildFlatButtonLoginWithGithub,
-              buildFlatButtonLogin
-            ]),
+            ButtonBar(children: [buildFlatButtonLoginWithGithub, buildFlatButtonLogin]),
           ],
         ),
       ),
@@ -143,9 +134,9 @@ class _LoginPageViewState extends State<LoginPageView> {
 
   TextFormField get buildTextFormFieldLogin {
     return TextFormField(
+      keyboardType: TextInputType.emailAddress,
       controller: loginPageViewModel.email,
-      decoration:
-          InputDecoration(labelText: StringConstanst.instance.emailAddress),
+      decoration: InputDecoration(labelText: StringConstanst.instance.emailAddress),
     );
   }
 
@@ -163,8 +154,7 @@ class _LoginPageViewState extends State<LoginPageView> {
       shape: StadiumBorder(side: BorderSide()),
       child: Text(
         StringConstanst.instance.signInWithGithub,
-        style: context.textTheme.button
-            .copyWith(color: context.colorScheme.surface),
+        style: context.textTheme.button.copyWith(color: context.colorScheme.surface),
       ),
     );
   }
@@ -176,8 +166,7 @@ class _LoginPageViewState extends State<LoginPageView> {
       shape: StadiumBorder(),
       child: Text(
         StringConstanst.instance.login.toUpperCase(),
-        style: context.textTheme.button
-            .copyWith(color: context.colorScheme.background),
+        style: context.textTheme.button.copyWith(color: context.colorScheme.background),
       ),
     );
   }
