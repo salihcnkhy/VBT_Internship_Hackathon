@@ -1,4 +1,4 @@
-# UYGULAMA İSMİ
+# WORDFIELD
 
 # UYGULAMA AMACI:
 - İngilizce kelime öğretmek
@@ -18,6 +18,7 @@
 ## *Tasarım araçları:
 - Adobe XD
 - Zeplin
+- Adobe Photoshop
 
 ## UYGULAMANIN İÇERDİĞİ UI KISIMLARI
 ### Bilgi Verme Ekranı
