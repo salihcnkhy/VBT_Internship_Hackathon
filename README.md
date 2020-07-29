@@ -1,4 +1,4 @@
-# WORDFIELD
+# WORDFIELD APP
 
 # UYGULAMA AMACI:
 - İngilizce kelime öğretmek
