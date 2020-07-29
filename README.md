@@ -31,5 +31,6 @@ ___
 ***
 ![statistical view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/statistical_view.png)
 ### Ayarlar Ekranı
+___
 ![settings view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/settings_view.png)
 
