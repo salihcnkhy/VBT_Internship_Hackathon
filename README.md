@@ -21,8 +21,5 @@
 
 ## UYGULAMANIN İÇERDİĞİ UI KISIMLARI
 Login Ekranı
-[login view]
+![login view](https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/login_view.png)
 
-
-
-[login view] : https://github.com/salihcnkhy/VBT_Intership_Hackathon/blob/master/ui_overviews/login_view.png
