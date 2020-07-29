@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:vbt_hackathon/core/extensions/build_context_extension.dart';
 
 class SettingsView extends StatefulWidget {
   @override
@@ -14,103 +15,62 @@ class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildScaffoldAppBar(),
-      body: buildScaffoldBody(),
+      body: buildScaffoldBody,
     );
   }
 
-  AppBar buildScaffoldAppBar() {
-    return AppBar(
-      centerTitle: true,
-      title: buildAppBarTitle(),
-      flexibleSpace: buildAppBarBackground(),
-    );
-  }
-
-  Text buildAppBarTitle() {
-    return Text(
-      'Ayarlar',
-      style: TextStyle(
-          fontFamily: "Quicksand",
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          fontSize: 25),
-    );
-  }
-
-  Container buildAppBarBackground() {
-    return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.orange, Colors.orange[900]],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight)),
-    );
-  }
-
-  SettingsList buildScaffoldBody() {
+  SettingsList get buildScaffoldBody {
     return SettingsList(
+      backgroundColor: context.colorScheme.background,
       sections: [
-        buildSettingsSectionCommon(),
-        buildSettingsSectionAccount(),
-        buildSettingsSectionSecurity(),
-        buildSettingsSectionMisc()
+        buildSettingsSectionCommon,
+        buildSettingsSectionAccount,
+        buildSettingsSectionSecurity,
+        buildSettingsSectionMisc
       ],
     );
   }
 
-  SettingsSection buildSettingsSectionCommon() {
+  SettingsSection get buildSettingsSectionCommon {
     return SettingsSection(
       title: 'Genel',
       tiles: [
         SettingsTile(
           title: 'Dil',
           subtitle: 'Türkçe',
-          leading: Icon(
-            Icons.language,
-            color: Colors.orange[400],
-          ),
+          leading: Icon(Icons.language, color: context.colorScheme.primary),
         ),
       ],
     );
   }
 
-  SettingsSection buildSettingsSectionAccount() {
+  SettingsSection get buildSettingsSectionAccount {
     return SettingsSection(
       title: 'Hesap',
       tiles: [
         SettingsTile(
-            title: 'Email',
-            leading: Icon(
-              Icons.email,
-              color: Colors.orange[400],
-            )),
+          title: 'Email',
+          leading: Icon(Icons.email, color: context.colorScheme.primary),
+        ),
         SettingsTile(
-            title: 'Parola',
-            leading: Icon(
-              Icons.lock,
-              color: Colors.orange[400],
-            )),
+          title: 'Parola',
+          leading: Icon(Icons.lock, color: context.colorScheme.primary),
+        ),
         SettingsTile(
-            title: 'Oturumu kapa',
-            leading: Icon(
-              Icons.exit_to_app,
-              color: Colors.orange[400],
-            )),
+          title: 'Oturumu kapa',
+          leading: Icon(Icons.exit_to_app, color: context.colorScheme.primary),
+        ),
       ],
     );
   }
 
-  SettingsSection buildSettingsSectionSecurity() {
+  SettingsSection get buildSettingsSectionSecurity {
     return SettingsSection(
       title: 'Güvenlik',
       tiles: [
         SettingsTile.switchTile(
           title: 'Parola değiştir',
-          leading: Icon(
-            Icons.lock,
-            color: Colors.orange[400],
-          ),
+          leading: Icon(Icons.lock, color: context.colorScheme.primary),
           switchValue: changePasswordValue,
           onToggle: (bool value) {
             setState(() {
@@ -121,10 +81,7 @@ class _SettingsViewState extends State<SettingsView> {
         SettingsTile.switchTile(
           title: 'Bildirimleri aç',
           enabled: notificationsEnabled,
-          leading: Icon(
-            Icons.notifications_active,
-            color: Colors.orange[400],
-          ),
+          leading: Icon(Icons.notifications_active, color: context.colorScheme.primary),
           switchValue: notificationsValue,
           onToggle: (bool value) {
             setState(() {
@@ -136,22 +93,16 @@ class _SettingsViewState extends State<SettingsView> {
     );
   }
 
-  SettingsSection buildSettingsSectionMisc() {
+  SettingsSection get buildSettingsSectionMisc {
     return SettingsSection(
       title: 'Diğer',
       tiles: [
         SettingsTile(
             title: 'Hizmet kullanım şartları',
-            leading: Icon(
-              Icons.description,
-              color: Colors.orange[400],
-            )),
+            leading: Icon(Icons.description, color: context.colorScheme.primary)),
         SettingsTile(
             title: 'Açık kaynak lisansları',
-            leading: Icon(
-              Icons.collections_bookmark,
-              color: Colors.orange[400],
-            )),
+            leading: Icon(Icons.collections_bookmark, color: context.colorScheme.primary)),
       ],
     );
   }

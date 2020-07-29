@@ -4,6 +4,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/core/app/theme/color_scheme.dart';
 import 'package:vbt_hackathon/core/extensions/build_context_extension.dart';
 import 'package:vbt_hackathon/ui/Views/Home/category_list_page/category_list_page.dart';
+import 'package:vbt_hackathon/ui/Views/settings/settings_view.dart';
 import './home_page_view_model.dart';
 
 class HomePageView extends HomePageViewModel {
@@ -74,7 +75,7 @@ class HomePageView extends HomePageViewModel {
   }
 
   List<Widget> _buildScreens() {
-    return [CategoryListPage(), Container(color: Colors.red)];
+    return [CategoryListPage(), SettingsView()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
