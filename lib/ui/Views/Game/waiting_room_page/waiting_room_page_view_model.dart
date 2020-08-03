@@ -25,15 +25,23 @@ abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage>
     infoText = "Connecting to " + widget.category.id + "...";
   }
 
-  void dataCallBack(DocumentSnapshot snapshot) {
+  void dataCallBack(snapshot) {
     if (room == null) {
       room = GameRoom();
-      WordList wordList = WordList.fromJson(snapshot.data);
-      wordList.words.shuffle();
-      room.words = wordList.words.sublist(0, 3);
-      print("Words Size: " + room.words.length.toString());
-      print(room.words.map((e) => print(e.word)));
-      socket.connect(widget.category.id, _connectionCallBack);
+      if (snapshot.data != null) {
+        WordList wordList = WordList.fromJson(snapshot.data);
+        if (wordList.words.length > 2) {
+          wordList.words.shuffle();
+          room.words = wordList.words.sublist(0, 3);
+          print("Words Size: " + room.words.length.toString());
+          print(room.words.map((e) => print(e.word)));
+          socket.connect(widget.category.id, _connectionCallBack);
+        } else {
+          Navigator.pop(context);
+        }
+      } else {
+        Navigator.pop(context);
+      }
     }
   }
 

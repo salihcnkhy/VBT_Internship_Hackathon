@@ -86,6 +86,7 @@ function endGame(data) {
 
         var users = grp.b2[index].users;
         users.forEach(user => {
+            user.socket.emit("endGame",true);
             user.socket.leaveAll();
             user.socket.disconnect();
             console.log("socket disconnected from all room");
