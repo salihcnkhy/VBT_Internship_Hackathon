@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:vbt_hackathon/Core/Firebase/Firebase.dart';
 import 'package:vbt_hackathon/Models/Category.dart';
@@ -9,12 +11,15 @@ abstract class CategoryListPageViewModel extends State<CategoryListPage>
   List<Category> categories = new List();
 
   void queryCallBack(snapshot) {
-    categories.clear();
+    List<Category> tempCategories = List();
     for (var data in snapshot.documents) {
       var category = Category.fromSnapshot(data);
       // add condition for performance
+      tempCategories.add(category);
+    }
+    if (categories.isEmpty) {
       setState(() {
-        categories.add(category);
+        categories = tempCategories;
       });
     }
   }

@@ -16,7 +16,7 @@ abstract class RegisterPageViewModel extends State<RegisterPage>
       FocusScopeNode currentFocus = FocusScope.of(context);
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
-      } 
+      }
       myFuture = register(email.text, password.text);
     });
   }
@@ -30,6 +30,6 @@ abstract class RegisterPageViewModel extends State<RegisterPage>
 
   void registerCallBack(FirebaseUser user) {
     var newUser = User(uuid: user.uid);
-    addDocument("User", newUser.toJson());
+    addUserDocument(newUser.toJson());
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:vbt_hackathon/Core/Firebase/Firebase.dart';
 import 'package:vbt_hackathon/core/extensions/build_context_extension.dart';
 import '../../../../Helper/Views/progress_bar.dart';
 import '../../../../Helper/Views/stream_builder_helper.dart';
@@ -12,7 +13,7 @@ class CategoryListPageView extends CategoryListPageViewModel {
   @override
   Widget build(BuildContext context) {
     return StreamHelper(
-      stream: getQuerySnapshot("Category"),
+      stream: getQuerySnapshot(CollectionID.Category),
       hasDataCallback: queryCallBack,
       hasDataWidget: buildGridView(categories),
       hasErrorWidget: Text("Error"),
@@ -26,7 +27,8 @@ class CategoryListPageView extends CategoryListPageViewModel {
       crossAxisCount: 2,
       crossAxisSpacing: 25,
       mainAxisSpacing: 25,
-      children: snapshot.map((category) => buildGridViewCard(category)).toList(),
+      children:
+          snapshot.map((category) => buildGridViewCard(category)).toList(),
     );
   }
 

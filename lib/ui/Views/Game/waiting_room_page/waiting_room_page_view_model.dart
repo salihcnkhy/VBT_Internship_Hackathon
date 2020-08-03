@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/Core/EnvironmentObjects/EnvironmentObj.dart';
+import 'package:vbt_hackathon/Core/Firebase/Firebase.dart';
 import 'package:vbt_hackathon/Core/Socket.IO/SocketIO.dart';
 import 'package:vbt_hackathon/Helper/Class/uuid_generator.dart';
 import 'package:vbt_hackathon/Models/GameRoom.dart';
@@ -10,7 +12,8 @@ import 'package:vbt_hackathon/Models/Word.dart';
 import 'package:vbt_hackathon/ui/Views/Game/game_room_page/game_room_page.dart';
 import './waiting_room_page.dart';
 
-abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
+abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage>
+    with FirestoreProcess {
   SocketIO socket = SocketIO();
   String infoText;
   var env = EnvironmentObjects();
@@ -22,17 +25,12 @@ abstract class WaitingRoomPageViewModel extends State<WaitingRoomPage> {
     infoText = "Connecting to " + widget.category.id + "...";
   }
 
-  void dataCallBack(data) {
+  void dataCallBack(DocumentSnapshot snapshot) {
     if (room == null) {
       room = GameRoom();
-      List<Word> wordList = List();
-      wordList = data.words;
-      wordList.shuffle();
-      room.words.add(wordList.removeLast());
-      room.words.add(wordList.removeLast());
-      room.words.add(wordList.removeLast());
-      room.words.add(wordList.removeLast());
-      room.words.add(wordList.removeLast());
+      WordList wordList = WordList.fromJson(snapshot.data);
+      wordList.words.shuffle();
+      room.words = wordList.words.sublist(0, 3);
       print("Words Size: " + room.words.length.toString());
       print(room.words.map((e) => print(e.word)));
       socket.connect(widget.category.id, _connectionCallBack);

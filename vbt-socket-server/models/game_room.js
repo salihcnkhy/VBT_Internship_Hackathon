@@ -1,6 +1,6 @@
-function GameRoom(id,roomUser){
+function GameRoom(id,roomUsers){
     this.id = id;
-    this.user = roomUser;
+    this.users = roomUsers;
     this.words = [];
 }
 module.exports.GameRoom = GameRoom;

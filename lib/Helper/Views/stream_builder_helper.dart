@@ -1,21 +1,26 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:vbt_hackathon/Helper/Views/progress_bar.dart';
 
 class StreamHelper<T> extends StatelessWidget {
   StreamHelper(
       {Key key,
-      this.stream,
-      this.progressWidget,
-      this.hasDataWidget,
-      this.hasErrorWidget,
+      @required this.stream,
+      this.progressWidget = const DefaultProgressBar(),
+      @required this.hasDataWidget,
+      this.hasErrorWidget = const Text("Error Occured"),
       this.hasDataCallback})
       : super(key: key) {
-    stream.listen((event) {
+    _controller.addStream(stream);
+    _controller.stream.listen((data) {
       if (hasDataCallback != null) {
-        hasDataCallback(event);
+        hasDataCallback(data);
+        print(data);
       }
     });
   }
-
+  final StreamController<T> _controller = StreamController();
   final Stream<T> stream;
   final Widget progressWidget;
   final Widget hasDataWidget;

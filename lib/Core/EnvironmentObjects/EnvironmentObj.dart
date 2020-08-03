@@ -15,5 +15,5 @@ class EnvironmentObjects {
     _user = user;
   }
 
-  List<WordList> words = new List();
+  List<WordList> learnedWordList = new List();
 }

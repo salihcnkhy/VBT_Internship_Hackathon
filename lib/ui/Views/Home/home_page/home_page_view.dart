@@ -4,6 +4,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vbt_hackathon/core/app/theme/color_scheme.dart';
 import 'package:vbt_hackathon/core/extensions/build_context_extension.dart';
 import 'package:vbt_hackathon/ui/Views/Home/category_list_page/category_list_page.dart';
+import 'package:vbt_hackathon/ui/Views/Home/learned_words_list_page/learned_words_list_page.dart';
 import 'package:vbt_hackathon/ui/Views/settings/settings_view.dart';
 import './home_page_view_model.dart';
 
@@ -75,7 +76,7 @@ class HomePageView extends HomePageViewModel {
   }
 
   List<Widget> _buildScreens() {
-    return [CategoryListPage(), SettingsView()];
+    return [CategoryListPage(), LearnedWordsListPage(), SettingsView()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -83,6 +84,12 @@ class HomePageView extends HomePageViewModel {
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.book),
         title: ("Home"),
+        activeColor: context.colorScheme.primary,
+        inactiveColor: context.colorScheme.secondary,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.bookmark),
+        title: ("Learned"),
         activeColor: context.colorScheme.primary,
         inactiveColor: context.colorScheme.secondary,
       ),

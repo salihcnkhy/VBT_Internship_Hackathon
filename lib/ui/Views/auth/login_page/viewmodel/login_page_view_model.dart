@@ -16,6 +16,7 @@ abstract class _LoginPageViewModelBase
     with Store, BaseViewModel, FirebaseAuthProcess {
   TextEditingController email;
   TextEditingController password;
+  @observable
   Future<FirebaseUser> myFuture;
 
   @override
