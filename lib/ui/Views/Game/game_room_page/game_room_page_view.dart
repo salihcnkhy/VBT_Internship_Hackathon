@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:vbt_hackathon/Helper/Views/roundedrect_with_shadow.dart';
 import 'package:vbt_hackathon/Models/Word.dart';
 import './game_room_page_view_model.dart';
 
@@ -36,60 +37,9 @@ class GameRoomPageView extends GameRoomPageViewModel {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
+                FlatButton(onPressed: tryButton, child: Text("Try")),
                 FlatButton(
-                    onPressed: () {
-                      if (wordText.text.toLowerCase() ==
-                          widget.gameRoom.words[questionIndex].word
-                              .toLowerCase()) {
-                        setState(() {
-                          if (questionIndex ==
-                              widget.gameRoom.words.length - 1) {
-                            //TODO game is over
-                            endGame();
-                            print(
-                                "You are finished all words. Wait for other user or wait for time up");
-                          } else {
-                            questionIndex++;
-                            openChars.clear();
-                            setWordBoolList();
-                            wordText.clear();
-                          }
-                        });
-                      } else {
-                        wordText.clear();
-                      }
-                    },
-                    child: Text("Try")),
-                FlatButton(
-                    onPressed: () {
-                      if (coin - 10 >= 0) {
-                        int wordSize =
-                            widget.gameRoom.words[questionIndex].word.length;
-                        int randomCharIndex = Random().nextInt(wordSize);
-
-                        if (!openChars.contains(false)) {
-                          //TODO all chars opened
-                          setState(() {
-                            questionIndex++;
-                          });
-                        } else {
-                          while (openChars[randomCharIndex]) {
-                            randomCharIndex = Random().nextInt(wordSize);
-                          }
-                          setState(() {
-                            coin -= 10;
-                            openChars[randomCharIndex] = true;
-                            if (!openChars.contains(false)) {
-                              questionIndex++;
-                            }
-                          });
-                        }
-                      } else {
-                        // TODO Coin bitti
-                        print("coin bitti");
-                      }
-                    },
-                    child: Text("Get Letter"))
+                    onPressed: getLetterButton, child: Text("Get Letter"))
               ],
             )
           ],
@@ -99,13 +49,11 @@ class GameRoomPageView extends GameRoomPageViewModel {
   }
 
   Column buildWordField(Word word) {
-    int randomSpec = Random().nextInt(word.specifications.length);
-    int randomUsage =
-        Random().nextInt(word.specifications[randomSpec].usages.length);
-    String randomDefinition =
-        word.specifications[randomSpec].usages[randomUsage].defination;
     return Column(
-      children: <Widget>[buildWordRow(word.word), Text(randomDefinition)],
+      children: <Widget>[
+        buildWordRow(word.word),
+        Text(word.specifications.first.usages.first.defination)
+      ],
     );
   }
 
@@ -116,7 +64,8 @@ class GameRoomPageView extends GameRoomPageViewModel {
       children: <Widget>[
         for (var i = 0; i < word.length; i++)
           Expanded(
-              child: Container(
+              child: RoundedRectWithShadow(
+            borderRadius: BorderRadius.circular(2),
             child: openChars[i] ? Text(word[i]) : Text("_"),
           )),
       ],

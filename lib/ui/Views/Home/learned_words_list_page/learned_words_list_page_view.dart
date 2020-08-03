@@ -7,26 +7,32 @@ class LearnedWordsListPageView extends LearnedWordsListPageViewModel {
   @override
   Widget build(BuildContext context) {
     // Replace this with your build function
-    return StreamHelper(
-      stream: getWordQuerySnapshot(),
-      progressWidget: DefaultProgressBar(),
-      hasDataCallback: queryCallback,
-      hasDataWidget: ListView.builder(
-        itemCount: wordsList.length,
-        itemBuilder: (context, index) {
-          final wordList = wordsList[index];
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                wordList.id,
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              for (var word in wordList.words) ListTile(title: Text(word.word))
-            ],
-          );
-        },
-      ),
+    return isCalled
+        ? StreamHelper(
+            stream: getWordQuerySnapshot(),
+            progressWidget: DefaultProgressBar(),
+            hasDataCallback: queryCallback,
+            hasDataWidget: buildListView(),
+          )
+        : buildListView();
+  }
+
+  ListView buildListView() {
+    return ListView.builder(
+      itemCount: wordsList.length,
+      itemBuilder: (context, index) {
+        final wordList = wordsList[index];
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              wordList.id,
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            for (var word in wordList.words) ListTile(title: Text(word.word))
+          ],
+        );
+      },
     );
   }
 }

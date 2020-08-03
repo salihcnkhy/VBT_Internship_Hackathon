@@ -9,7 +9,7 @@ abstract class LearnedWordsListPageViewModel extends State<LearnedWordsListPage>
     with FirestoreProcess {
   // Add your state and logic here
   List<WordList> wordsList = EnvironmentObjects().learnedWordList;
-
+  bool isCalled = false;
   void queryCallback(QuerySnapshot snapshot) {
     List<WordList> tempList = List();
     snapshot.documents.forEach((doc) {
@@ -17,6 +17,7 @@ abstract class LearnedWordsListPageViewModel extends State<LearnedWordsListPage>
     });
     if (wordsList.isEmpty && snapshot.documents.isNotEmpty) {
       setState(() {
+        isCalled = true;
         wordsList = tempList;
         EnvironmentObjects().learnedWordList = wordsList;
       });
